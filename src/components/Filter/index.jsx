@@ -29,7 +29,7 @@ function Filter({ onFilterChange }) {
   }
   
   function handleSearch() {
-    onFilterChange({ searchTerm, category, company, sort, price });
+    onFilterChange({ search, category, company, sort, price });
   }
   
 
