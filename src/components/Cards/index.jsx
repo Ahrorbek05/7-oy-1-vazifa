@@ -2,68 +2,69 @@ import React, { useEffect, useState } from 'react';
 import data from '../../data.json';
 import styles from './index.module.css';
 
-function Cards() {
+function Cards({ filters }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    setProducts(data);
-  }, []);
+    let filteredProducts = data.data;
+
+    if (filters.searchx ) {
+      filteredProducts = filteredProducts.filter((product) =>
+        product.attributes.title.toLowerCase().includes(filters.searchTerm.toLowerCase())
+      );
+    }
+
+    if (filters.category !== 'all') {
+      filteredProducts = filteredProducts.filter((product) =>
+        product.attributes.category === filters.category
+      );
+    }
+
+    if (filters.company) {
+        filteredProducts = filteredProducts.filter((product) =>
+        product.attributes.company === filters.company
+      );
+    }
+
+      filteredProducts = filteredProducts.filter((product) =>
+      product.attributes.price / 100 <= filters.price
+    );
+
+    if (filters.sort) {
+      filteredProducts.sort((a, b) => {
+        if (filters.sort === 'az') {
+          return a.attributes.title.localeCompare(b.attributes.title);
+        } else if (filters.sort === 'za') {
+          return b.attributes.title.localeCompare(a.attributes.title);
+        } else if (filters.sort === 'high') {
+          return b.attributes.price - a.attributes.price;
+        } else if (filters.sort === 'low') {
+          return a.attributes.price - b.attributes.price;
+        }
+        return 0;
+      });
+    }
+
+    setProducts(filteredProducts);
+  }, [filters]);
 
   return (
     <div className={styles.container}>
       <div className={styles.cards}>
-        <div key={products.id} className={styles.card}>
-          <img src={products.image} alt={products.title} />
-          <h3>{products.name}</h3>
-        </div>
-      </div>
-
-      <div className={styles.card}>
-        <img src="" alt="" />
-        <h3>{products.title}</h3>
-      </div>
-
-      <div className={styles.card}>
-        <img src="" alt="" />
-        <h3>title</h3>
-      </div>
-
-      <div className={styles.card}>
-        <img src="" alt="" />
-        <h3>title</h3>
-      </div>
-
-      <div className={styles.card}>
-        <img src="" alt="" />
-        <h3>title</h3>
-      </div>
-
-      <div className={styles.card}>
-        <img src="" alt="" />
-        <h3>title</h3>
-      </div>
-
-      <div className={styles.card}>
-        <img src="" alt="" />
-        <h3>title</h3>
-      </div>
-
-      <div className={styles.card}>
-        <img src="" alt="" />
-        <h3>title</h3>
-      </div>
-
-      <div className={styles.card}>
-        <img src="" alt="" />
-        <h3>title</h3>
-      </div>
-
-      <div className={styles.card}>
-        <img src="" alt="" />
-        <h3>title</h3>
+        {products.map((product) => (
+          <div key={product.id} className={styles.card}>
+            <img
+              src={product.attributes.image}
+              alt={product.attributes.title}
+              className={styles.image}
+            />
+            <h3 className={styles.title}>{product.attributes.title}</h3>
+            <p className={styles.price}>${(product.attributes.price / 100).toFixed(2)}</p>
+          </div>
+        ))}
       </div>
     </div>
-  )
+  );
 }
 
-export default Cards
+export default Cards;

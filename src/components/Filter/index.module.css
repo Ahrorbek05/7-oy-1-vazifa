@@ -12,7 +12,7 @@
 }
 
 input{
-    width: 260px;
+    width: 250px;
     padding: 7px;
     border: none;   
     border-radius: 12px;
@@ -27,7 +27,7 @@ p{
 }
 
 .wrapper{
-    width: 1200px;
+    width: 1090px;
     height: 230px;
     background-color: #F0F6FF;
     padding: 30px;
@@ -42,7 +42,7 @@ option{
 
 select{
     outline-color: #afcdfa;
-    width: 275px;
+    width: 240px;
     padding: 7px 15px 7px 15px;
     border: none;
     border-radius: 12px;
@@ -85,7 +85,7 @@ select{
   background: #007bff;
   outline: none;
   opacity: 0.9;
-  border-radius: 5px;
+  border-radius: 15px;
   cursor: pointer;
 }
 
@@ -135,7 +135,7 @@ select{
     gap: 20px;
     position: relative;
     top: -65px;
-    left: 350px;
+    left: 330px;
   }
 
   .extraOptions input{
@@ -147,13 +147,15 @@ select{
   }
   
 .extraOptions button:nth-child(2){
-    margin-left: 150px;
-    width: 270px;
+    margin-left: 100px;
+    width: 250px;
+    border-radius: 10px;
 }
 
 .extraOptions button:nth-child(3){
     /* margin-left: 100px; */
-    width: 270px;
+    width: 250px;
+    border-radius: 10px;
 }
   
   .extraOptions label {

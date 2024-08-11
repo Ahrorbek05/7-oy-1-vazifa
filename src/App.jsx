@@ -1,12 +1,24 @@
-import React from "react";
-import Filter from "./components/Filter";
-import Cards from "./components/Cards";
+import React, { useState } from 'react';
+import Filter from './components/Filter';
+import Cards from './components/Cards';
 
 function App() {
+  const [filters, setFilters] = useState({
+    searchTerm: '',
+    category: 'all',
+    company: '',
+    sort: '',
+    price: 0,
+  });
+
+  const handleChange = (Filter) => {
+    setFilters(Filter);
+  };
+
   return (
-    <div className="App">
-      <Filter />
-      <Cards/>
+    <div>
+      <Filter onFilterChange={handleChange} />
+      <Cards filters={filters} />
     </div>
   );
 }
