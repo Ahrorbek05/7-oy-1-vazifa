@@ -4,7 +4,7 @@ import Cards from './components/Cards';
 
 function App() {
   const [filters, setFilters] = useState({
-    searchTerm: '',
+    search: '',
     category: 'all',
     company: '',
     sort: '',
